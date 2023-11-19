@@ -41,22 +41,28 @@ class HardCode(BaseHardCode):
 
 
     def get_response_content(self) -> list:
-        information_key = []
+        information_keys = []
 
         if self.response_content and isinstance(self.response_content, list):
             for item in self.response_content:
                 for key, _ in item.items():
                     if not key in self.response_keys:
-                        information_key.append(key)
+                        information_keys.append(key)
                     else:
                         continue
+
+                for info_key in information_keys:
+                    print(info_key+': '+str(item.get(info_key)))
+
                 break
 
-        return information_key
+        return information_keys
 
 
-    def manipulating_content(self, information_key: list):
-        print(information_key)
+    def manipulating_content(self, information_keys: list):
+        # print(information_keys)
+        # for info_key in information_keys:
+        pass
 
 
     # def start_process(self):

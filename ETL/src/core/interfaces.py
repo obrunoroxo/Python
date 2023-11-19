@@ -18,10 +18,10 @@ class BaseHardCode(ABC):
         pass
 
     @abstractmethod
-    def manipulating_content(self, information_keys: list):
+    def manipulating_content(self, checked_content: dict):
         pass
 
     def start_process(self):
         print(self.check_status)
-        information_key = self.get_response_content()
-        self.manipulating_content(information_keys = information_key)
+        checked_content = self.get_response_content()
+        self.manipulating_content(checked_content = checked_content)

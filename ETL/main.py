@@ -1,7 +1,7 @@
 import requests
 import typing as T
 
-from src.core.interfaces.interfaces import BaseHardCode
+from src.core.interfaces import BaseHardCode
 
 class HardCode(BaseHardCode):
     def __init__(
@@ -40,8 +40,9 @@ class HardCode(BaseHardCode):
         return response_status
 
 
-    def get_response_content(self) -> list:
-        information_keys = []
+    def get_response_content(self) -> dict:
+        information_keys = list()
+        checked_content = dict()
 
         if self.response_content and isinstance(self.response_content, list):
             for item in self.response_content:
@@ -52,17 +53,50 @@ class HardCode(BaseHardCode):
                         continue
 
                 for info_key in information_keys:
-                    print(info_key+': '+str(item.get(info_key)))
+                    # print(info_key+': '+str(item.get(info_key)))
+
+                    checked_content[info_key] = item.get(info_key)
 
                 break
 
-        return information_keys
+        # print(checked_content)
+        print(information_keys)
+
+        return checked_content
 
 
-    def manipulating_content(self, information_keys: list):
-        # print(information_keys)
-        # for info_key in information_keys:
-        pass
+    def manipulating_content(self, checked_content: dict):
+        # print(checked_content)
+        name = checked_content.get('name')
+        independent = checked_content.get('independent')
+        status = checked_content.get('status')
+        un_member = checked_content.get('unMember')
+        currencies = checked_content.get('currencies')
+        capital = checked_content.get('capital')
+        altSpellings = checked_content.get('altSpellings')
+        region = checked_content.get('region')
+        subregion = checked_content.get('subregion')
+        languages = checked_content.get('languages')
+        translations = checked_content.get('translations')
+        lat_lng = checked_content.get('latlng')
+        landlocked = checked_content.get('landlocked')
+        borders = checked_content.get('borders')
+        area = checked_content.get('area')
+        demonyms = checked_content.get('demonyms')
+        flag = checked_content.get('flag')
+        maps = checked_content.get('maps')
+        population = checked_content.get('population')
+        gini = checked_content.get('gini')
+        fifa = checked_content.get('fifa')
+        car = checked_content.get('car')
+        timezones = checked_content.get('timezones')
+        continents = checked_content.get('continents')
+        flags = checked_content.get('flags')
+        coat_of_arms = checked_content.get('coatOfArms')
+        start_of_week = checked_content.get('startOfWeek')
+        capital_info = checked_content.get('capitalInfo')
+        print(area)
+        # pass
 
 
     # def start_process(self):

@@ -1,6 +1,7 @@
 import requests
 import typing as T
 
+from src.core.utils import OtherColors
 from src.core.interfaces import BaseHardCode
 
 class HardCode(BaseHardCode):
@@ -15,7 +16,7 @@ class HardCode(BaseHardCode):
         self.version = version or 'v3.1'
         self.endpoint: T.Optional[T.Union[str, None]] = f'{self.url}/{self.version}/' if self.url and self.version else None
         self.response_content = set()
-        self.response_keys: list = [
+        self.response_keys: T.List = [
             "tld",
             "cca2",
             "ccn3",
@@ -23,12 +24,13 @@ class HardCode(BaseHardCode):
             "cioc",
             "idd"
         ]
+        self.unix_printer = OtherColors()
 
         super().__init__(**kwargs)
 
 
     @property
-    def check_status(self) -> int:
+    def check_status(self) -> int | str:
         response = self.req.get(self.endpoint+'all')
         response_status = response.status_code
         if response_status == 200:
@@ -37,7 +39,9 @@ class HardCode(BaseHardCode):
             except Exception as err:
                 raise err
             self.response_content = response
-        return response_status
+            return response_status
+        else:
+            return response_status, response.content
 
 
     def get_response_content(self) -> dict:
@@ -53,14 +57,9 @@ class HardCode(BaseHardCode):
                         continue
 
                 for info_key in information_keys:
-                    # print(info_key+': '+str(item.get(info_key)))
-
                     checked_content[info_key] = item.get(info_key)
 
                 break
-
-        # print(checked_content)
-        print(information_keys)
 
         return checked_content
 
@@ -95,7 +94,7 @@ class HardCode(BaseHardCode):
         coat_of_arms = checked_content.get('coatOfArms')
         start_of_week = checked_content.get('startOfWeek')
         capital_info = checked_content.get('capitalInfo')
-        print(area)
+        print(self.unix_printer.GREEN)
         # pass
 
 

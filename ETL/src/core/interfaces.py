@@ -1,3 +1,5 @@
+from ..core.logger import logger
+
 from abc import (
     ABC,
     abstractmethod,
@@ -22,6 +24,10 @@ class BaseHardCode(ABC):
         pass
 
     def start_process(self):
-        print(self.check_status)
+        logger().info(self.check_status)
         checked_content = self.get_response_content()
         self.manipulating_content(checked_content = checked_content)
+
+
+# class BaseColorUtils(ABC):
+    

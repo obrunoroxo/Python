@@ -1,8 +1,9 @@
 import requests
 import typing as T
 
+from src.core.utils import clear
 from src.core.utils import OtherColors
-from src.core.interfaces import BaseHardCode
+from src.core.interfaces import BaseHardCode, BaseColorUtils
 
 class HardCode(BaseHardCode):
     def __init__(
@@ -65,7 +66,6 @@ class HardCode(BaseHardCode):
 
 
     def manipulating_content(self, checked_content: dict):
-        # print(checked_content)
         name = checked_content.get('name')
         independent = checked_content.get('independent')
         status = checked_content.get('status')
@@ -106,11 +106,23 @@ class HardCode(BaseHardCode):
 
 
 
+class teste(BaseColorUtils):
+    # verify_os_by_platform_lib()
+    clear()
+    # verify_os_by_os_lib()
+    # pass
+
 
 
 
 if __name__ == '__main__':
+    # MAIN DEF TO RUN HardCode CLASS
+    # def main():
+    #     instance = HardCode()
+    #     instance.start_process()
+    # main()
+
     def main():
-        instance = HardCode()
+        instance = teste()
         instance.start_process()
     main()

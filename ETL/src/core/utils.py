@@ -48,7 +48,14 @@ class __OperationalSystemVerification(BaseOperationalSystemVerification):
     def __init__( self ) -> None:
         pass
 
-    def verify_os_by_platform_lib( self ):
+    @property
+    def verify_os_by_platform_lib( self ) -> str:
+        '''
+            Windows = Windows operational system
+            Linux = Linux operational system
+            Darwin = macOS Operational system
+        '''
+
         # Get the operating system name by: » " platform " library.
         os_name = platform.system()
 
@@ -61,42 +68,35 @@ class __OperationalSystemVerification(BaseOperationalSystemVerification):
         # Get additional system information by: » " platform " library.
         system_info = platform.uname()
 
-        # Showing information logs by: » " platform " library.
-        logger().info(f"Operating System: {os_name}")
-        print('\n')
-        logger().info(f"OS Version: {os_version}")
-        print('\n')
-        logger().info(f"Machine Type: {machine_type}")
-        print('\n')
-        logger().info(f"System Info: {system_info}")
+        return os_name
 
 
-    def verify_os_by_os_lib( self ):
+    @property
+    def verify_os_by_os_lib( self ) -> str:
         '''
             nt = Windows operational system
-            posix = Linux operational system
+            posix = Linux / macOS operational system
         '''
 
         operational_system = os.name
 
-        if operational_system == 'nt':
-            # return os.system('cls')
-            logger().info(operational_system)
-        elif operational_system == 'posix':
-            logger().info(operational_system)
-        else:
-            logger().error('Ops! The operational system is not supported...')
+        return operational_system
 
 
-    def start_process( self ):
-        self.verify_os_by_platform_lib()
-        self.verify_os_by_os_lib()
 
-
-def stand_by( milliseconds: T.Optional[ T.Union[ int, float ] ] ) -> None:
+def stand_by( milliseconds: T.Optional[ T.Union[ int, float ] ] ) -> T.Any:
     return time.sleep( milliseconds )
+
 
 
 def clear() -> None:
     os_name = __OperationalSystemVerification()
-    os_name.start_process()
+    verified_os_command = os_name.start_process()
+    logger().info(verified_os_command)
+    stand_by(5)
+
+    # if verified_os_command == 'cls':
+    #     os.system('cls')
+
+    # if verified_os_command == 'clear':
+    #     os.system('clear')

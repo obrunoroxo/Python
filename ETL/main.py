@@ -108,9 +108,9 @@ class HardCode(BaseHardCode):
 
 class teste(BaseColorUtils):
     # verify_os_by_platform_lib()
-    clear()
+    # clear()
     # verify_os_by_os_lib()
-    # pass
+    pass
 
 
 

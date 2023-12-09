@@ -1,10 +1,6 @@
 
-from ..core.logger import logger
-from ..core.treatments import treatment
-from ..core.exceptions import (
-    OperationalSystemValueError,
-    OperationalSystemUnknownValueError
-)
+from ..utils.logger import logger
+from ..utils.treatments import treatment
 
 from abc import (
     ABC,
@@ -15,43 +11,8 @@ from abc import (
 )
 
 
-class BaseHardCode(ABC):
-    '''
-        [ INFORMATION IS REQUIRED ABOUT WHAT THIS CLASS AND YOUR FUNCTIONS DOES, ITS EXECUTION ORDER, AMONG OTHERS... ]
-    '''
-
-    @abstractmethod
-    @abstractproperty
-    def check_status(self) -> int:
-        pass
 
 
-    @abstractmethod
-    def get_response_content(self) -> list:
-        pass
-
-
-    @abstractmethod
-    def manipulating_content(self, checked_content: dict):
-        pass
-
-
-    def start_process(self):
-        logger().info(self.check_status)
-        checked_content = self.get_response_content()
-        self.manipulating_content(checked_content = checked_content)
-
-
-class BaseColorUtils(ABC):
-    '''
-        [ INFORMATION IS REQUIRED ABOUT WHAT THIS CLASS AND YOUR FUNCTIONS DOES, ITS EXECUTION ORDER, AMONG OTHERS... ]
-    '''
-
-    
-
-    def start_process(self):
-        # self.verify_os()
-        pass
 
 
 class BaseOperationalSystemVerification(ABC):
@@ -96,8 +57,8 @@ class BaseOperationalSystemVerification(ABC):
 
 
     def start_process( self ):
-        os_os_name = self.verify_os_by_os_lib
-        platform_os_name = self.verify_os_by_platform_lib
+        os_by_os_lib = self.verify_os_by_os_lib
+        os_by_platform_lib = self.verify_os_by_platform_lib
         logger().info(platform_os_name)
         logger().info(os_os_name)
         verified_os_command = self.verification_os( operational_system_os_lib = 14, operational_system_platform_lib = platform_os_name )

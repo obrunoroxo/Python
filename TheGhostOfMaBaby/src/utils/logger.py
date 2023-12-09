@@ -1,8 +1,14 @@
 # Extra libraries imports
 import structlog
+
 import logging.config
+
 from dateutil import parser
-from datetime import timedelta, timezone
+from datetime import (
+    timezone,
+    timedelta
+)
+
 
 
 def __convert_to_desired_timezone(_, __, event_dict):

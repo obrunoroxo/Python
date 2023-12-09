@@ -1,0 +1,11 @@
+services:
+  personalpasswordvault:
+    build:
+      context: .
+      dockerfile: ./src/deploy/Dockerfile
+    tty: true
+    env_file:
+      - ./src/config/.env
+    volumes:
+      - ./:/personalpasswordvault
+    working_dir: /personalpasswordvault
